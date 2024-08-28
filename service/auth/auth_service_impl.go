@@ -32,19 +32,19 @@ func (a *authServiceImpl) Login(payload *models.Auths) (*models.LoginResponse, e
 	}
 
 	// generate access Token
-	accessToken, err := auth.GenerateAccessToken(loginInfo.ID)
+	accessToken, err := auth.GenerateAccessToken(loginInfo.IDUser)
 	if err != nil {
 		return nil, err
 	}
 
 	// generate Refresh Token
-	refreshToken, err := auth.GenerateRefreshToken(loginInfo.ID)
+	refreshToken, err := auth.GenerateRefreshToken(loginInfo.IDUser)
 	if err != nil {
 		return nil, err
 	}
 
 	return &models.LoginResponse{
-		ID:            loginInfo.ID,
+		ID:            loginInfo.IDUser,
 		AccessToken:   accessToken,
 		RefreshTokens: refreshToken,
 	}, nil

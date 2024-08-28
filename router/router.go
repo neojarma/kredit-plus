@@ -1,13 +1,19 @@
 package router
 
 import (
+	"kredit_plus/auth"
 	auth_controller "kredit_plus/controller/auth"
+	peminjaman_controller "kredit_plus/controller/peminjaman"
 	user_controller "kredit_plus/controller/user"
+	assets_repository "kredit_plus/repository/assets"
 	auth_repository "kredit_plus/repository/auth"
 	limit_repository "kredit_plus/repository/limit"
+	peminjaman_repository "kredit_plus/repository/peminjaman"
+	penagihan_repository "kredit_plus/repository/penagihan"
 	user_repository "kredit_plus/repository/user"
-	"kredit_plus/repository/user_tenor"
+	user_tenor_repository "kredit_plus/repository/user_tenor"
 	auth_service "kredit_plus/service/auth"
+	peminjaman_service "kredit_plus/service/peminjaman"
 	user_service "kredit_plus/service/user"
 
 	"github.com/labstack/echo/v4"
@@ -24,15 +30,22 @@ func Router(setup Setups) {
 	userRepo := user_repository.NewUserRepository(setup.DB)
 	authRepo := auth_repository.NewAuthRepository(setup.DB)
 	userLimitRepo := limit_repository.NewTenorLimitRepository(setup.DB)
-	userTenorRepo := user_tenor.NewUserTenorRepository(setup.DB)
+	userTenorRepo := user_tenor_repository.NewUserTenorRepository(setup.DB)
 	userService := user_service.NewUserService(authRepo, userRepo, userTenorRepo, userLimitRepo)
 	userController := user_controller.NewUserController(userService)
 
 	authService := auth_service.NewAuthService(authRepo)
 	authController := auth_controller.NewAuthController(authService)
 
+	assetRepo := assets_repository.NewAssetRepository(setup.DB)
+	peminjamanRepository := peminjaman_repository.NewPeminjaman(setup.DB)
+	penagihanRepo := penagihan_repository.NewPenagihanRepository(setup.DB)
+	peminjamanService := peminjaman_service.NewPeminjamanService(peminjamanRepository, assetRepo, userTenorRepo, penagihanRepo)
+	peminjamanController := peminjaman_controller.NewPeminjaman(peminjamanService)
+
 	setup.Echo.POST("/register", userController.Register)
 	setup.Echo.POST("/login", authController.Login)
 	setup.Echo.POST("/refresh-token", authController.RefreshToken)
 
+	setup.Echo.POST("/kredit", peminjamanController.Kredit, auth.VerifyToken)
 }

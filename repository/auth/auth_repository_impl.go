@@ -22,5 +22,5 @@ func (m *authRepositoryImpl) InsertToAuth(payload *models.Auths) error {
 
 func (m *authRepositoryImpl) Login(payload *models.Auths) (*models.Auths, error) {
 	model := new(models.Auths)
-	return payload, m.DB.Where("email = ?", payload.Email).First(model).Error
+	return model, m.DB.Where("email = ?", payload.Email).First(model).Error
 }

@@ -8,7 +8,7 @@ import (
 	auth_repository "kredit_plus/repository/auth"
 	limit_repository "kredit_plus/repository/limit"
 	user_repository "kredit_plus/repository/user"
-	"kredit_plus/repository/user_tenor"
+	user_tenor_repository "kredit_plus/repository/user_tenor"
 	"mime/multipart"
 	"os"
 	"path/filepath"
@@ -17,11 +17,11 @@ import (
 type userServiceImpl struct {
 	AuthRepo      auth_repository.AuthRepository
 	UserRepo      user_repository.UserRepository
-	UserLimitRepo user_tenor.UserTenor
+	UserLimitRepo user_tenor_repository.UserTenor
 	LimitRepo     limit_repository.TenorLimitRepository
 }
 
-func NewUserService(authRepo auth_repository.AuthRepository, userRepo user_repository.UserRepository, userLimitRepo user_tenor.UserTenor, limitRepo limit_repository.TenorLimitRepository) UserService {
+func NewUserService(authRepo auth_repository.AuthRepository, userRepo user_repository.UserRepository, userLimitRepo user_tenor_repository.UserTenor, limitRepo limit_repository.TenorLimitRepository) UserService {
 	return &userServiceImpl{
 		AuthRepo:      authRepo,
 		UserRepo:      userRepo,
@@ -87,6 +87,10 @@ func (s *userServiceImpl) Register(payload *models.UserRequestRegister) error {
 		ID:             helper.GenerateRandomString(15),
 		ID_User:        newUserID,
 		ID_Limit_Tenor: tenorProfile.ID,
+		Tenor_1_Bulan:  tenorProfile.Tenor_1_Bulan,
+		Tenor_2_Bulan:  tenorProfile.Tenor_2_Bulan,
+		Tenor_3_Bulan:  tenorProfile.Tenor_3_Bulan,
+		Tenor_6_Bulan:  tenorProfile.Tenor_6_Bulan,
 	})
 	if err != nil {
 		return err
