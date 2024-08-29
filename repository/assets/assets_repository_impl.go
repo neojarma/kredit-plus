@@ -16,7 +16,12 @@ func NewAssetRepository(db *gorm.DB) AssetsRepository {
 	}
 }
 
-func (r *assetsRepositoryImpl) GetAssetRepository(payload *models.Assets) (*models.Assets, error) {
+func (r *assetsRepositoryImpl) GetAsset(payload *models.Assets) (*models.Assets, error) {
 	model := new(models.Assets)
 	return model, r.DB.Where("id_assets = ?", payload.ID).First(model).Error
+}
+
+func (r *assetsRepositoryImpl) GetAllAsset() ([]*models.Assets, error) {
+	var model []*models.Assets
+	return model, r.DB.Find(&model).Error
 }

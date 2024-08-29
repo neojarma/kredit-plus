@@ -37,7 +37,7 @@ func (s *peminjamanServiceImpl) GetAllPeminjaman(userID string) ([]*models.Pemin
 func (s *peminjamanServiceImpl) Kredit(payload *models.PeminjamanRequest) error {
 
 	// get total price assets
-	assetsInfo, err := s.AssetRepo.GetAssetRepository(&models.Assets{
+	assetsInfo, err := s.AssetRepo.GetAsset(&models.Assets{
 		ID: payload.ID_Assets,
 	})
 	if err != nil {

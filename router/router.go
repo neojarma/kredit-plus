@@ -2,6 +2,7 @@ package router
 
 import (
 	"kredit_plus/auth"
+	assets_controller "kredit_plus/controller/assets"
 	auth_controller "kredit_plus/controller/auth"
 	peminjaman_controller "kredit_plus/controller/peminjaman"
 	penagihan_controller "kredit_plus/controller/penagihan"
@@ -13,6 +14,7 @@ import (
 	penagihan_repository "kredit_plus/repository/penagihan"
 	user_repository "kredit_plus/repository/user"
 	user_tenor_repository "kredit_plus/repository/user_tenor"
+	assets_service "kredit_plus/service/assets"
 	auth_service "kredit_plus/service/auth"
 	peminjaman_service "kredit_plus/service/peminjaman"
 	penagihan_service "kredit_plus/service/penagihan"
@@ -47,6 +49,9 @@ func Router(setup Setups) {
 	penagihanService := penagihan_service.NewPenagihanService(penagihanRepo, peminjamanRepository, userTenorRepo)
 	penagihanController := penagihan_controller.NewPenagihanController(penagihanService)
 
+	assetsService := assets_service.NewAssetsService(assetRepo)
+	assetsController := assets_controller.NewAssetsController(assetsService)
+
 	setup.Echo.POST("/register", userController.Register)
 	setup.Echo.POST("/login", authController.Login)
 	setup.Echo.POST("/refresh-token", authController.RefreshToken)
@@ -58,6 +63,7 @@ func Router(setup Setups) {
 	setup.Echo.Static("/assets", "assets")
 	setup.Echo.GET("/peminjaman", peminjamanController.GetAllPeminjaman, auth.VerifyToken)
 	setup.Echo.GET("/penagihan/:id", penagihanController.GetAllPenagihan, auth.VerifyToken)
+	setup.Echo.GET("/assets", assetsController.GetAllAssets, auth.VerifyToken)
 
 	// get all asset
 	// get limit user
