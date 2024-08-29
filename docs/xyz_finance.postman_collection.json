@@ -1,0 +1,588 @@
+{
+	"info": {
+		"_postman_id": "8b4b482f-ef39-4f43-8c8e-6a8afb918a9b",
+		"name": "xyz_finance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19009309"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "neojarma@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "secretpassword",
+							"type": "text"
+						},
+						{
+							"key": "nik",
+							"value": "3123123",
+							"type": "text"
+						},
+						{
+							"key": "full_name",
+							"value": "neo jarma",
+							"type": "text"
+						},
+						{
+							"key": "legal_name",
+							"value": "neo jarma",
+							"type": "text"
+						},
+						{
+							"key": "tempat_lahir",
+							"value": "bandung",
+							"type": "text"
+						},
+						{
+							"key": "tanggal_lahir",
+							"value": "2024-08-28",
+							"type": "text"
+						},
+						{
+							"key": "gaji",
+							"value": "3000000",
+							"type": "text"
+						},
+						{
+							"key": "foto_ktp",
+							"type": "file",
+							"src": "/C:/Users/NeoJ/Pictures/1.jpg"
+						},
+						{
+							"key": "foto_selfie",
+							"type": "file",
+							"src": "/C:/Users/NeoJ/Pictures/1.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"neojarma@mail.com\",\r\n    \"password\" : \"secretpassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"neojarma@mail.com\",\r\n    \"password\" : \"secretpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 Aug 2024 09:31:00 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "402"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"success login\",\n    \"data\": {\n        \"user_id\": \"WFIdLL6qyL0BiB8\",\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiV0ZJZExMNnF5TDBCaUI4IiwiZXhwIjoxNzI1MDEwMjYwfQ.K6V5c4H77FNf1b2fZq1AIMOX_L5qi1PvRNOWe-wVSA4\",\n        \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiV0ZJZExMNnF5TDBCaUI4IiwiZXhwIjoxNzI1MTgzMDYwfQ.0DAR0GTZ91cROVzsnKW1oB26S6_fPVAckjnpzvQtNkE\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "refresh token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refresh_token\" : \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiUU9HNENqNWtXcTNjdnJJIiwiZXhwIjoxNzI1MTEzMTkxfQ.ioKaUmKntIjeIvpb-IlLLGfKvPRH1Yw--vZoMRwmsUs\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/refresh-token",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"refresh-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "kredit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiV0ZJZExMNnF5TDBCaUI4IiwiZXhwIjoxNzI0OTg2NDM5fQ.6277SY1XFsfvkdP3YCJEQEzKtS1aOziykxQmOSHdRI4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_asset\" : \"HHRySZn1Md6UOz9\",\r\n    \"tenor\" : 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/kredit",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"kredit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bayar-kredit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiV0ZJZExMNnF5TDBCaUI4IiwiZXhwIjoxNzI0OTg5ODYzfQ.FwBYuiwVao6xfHU6tsYazjRgQA-o4206iZjKuQidWAA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_penagihan\" : \"9xmUl13vgjjwJMO\",\r\n    \"nominal_pembayaran\" : 281600\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/bayar-kredit",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"bayar-kredit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiV0ZJZExMNnF5TDBCaUI4IiwiZXhwIjoxNzI1MDEwMjYwfQ.K6V5c4H77FNf1b2fZq1AIMOX_L5qi1PvRNOWe-wVSA4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/profile",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get profile",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 Aug 2024 08:23:30 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "325"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"id\": \"WFIdLL6qyL0BiB8\",\n        \"nik\": \"3123123\",\n        \"full_name\": \"neo jarma\",\n        \"legal_name\": \"neo jarma\",\n        \"tempat_lahir\": \"bandung\",\n        \"tanggal_lahir\": \"2024-08-28T00:00:00+07:00\",\n        \"gaji\": 3000000,\n        \"foto_ktp_path\": \"assets/WFIdLL6qyL0BiB8/KTP/1.jpg\",\n        \"foto_selfie_path\": \"assets/WFIdLL6qyL0BiB8/Selfie/1.jpg\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get assets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/assets/WFIdLL6qyL0BiB8/Selfie/1.jpg",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"assets",
+						"WFIdLL6qyL0BiB8",
+						"Selfie",
+						"1.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get data peminjaman",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiV0ZJZExMNnF5TDBCaUI4IiwiZXhwIjoxNzI0OTg2NDM5fQ.6277SY1XFsfvkdP3YCJEQEzKtS1aOziykxQmOSHdRI4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/peminjaman",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"peminjaman"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get data peminjaman",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/peminjaman",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"peminjaman"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 Aug 2024 08:23:45 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1155"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": [\n        {\n            \"id\": \"0rKShVISDF1lDZl\",\n            \"id_user\": \"WFIdLL6qyL0BiB8\",\n            \"id_asset\": \"HHRySZn1Md6UOz9\",\n            \"id_limit_tenor\": \"dn2yMlaDhFsHnjD\",\n            \"total_pembayaran\": 1689600,\n            \"total_bunga\": 189600,\n            \"status\": \"PAID\",\n            \"tanggal_peminjaman\": \"2024-08-29T11:31:25+07:00\",\n            \"tanggal_akhir_pembayaran\": \"2025-03-01T00:00:00+07:00\",\n            \"updated_at\": \"2024-08-29T11:36:20+07:00\",\n            \"sisa_pembayaran\": 0,\n            \"lama_tenor\": 6,\n            \"otr\": 1500000\n        },\n        {\n            \"id\": \"CZeLzCjxeYFs9B8\",\n            \"id_user\": \"WFIdLL6qyL0BiB8\",\n            \"id_asset\": \"HHRySZn1Md6UOz9\",\n            \"id_limit_tenor\": \"dn2yMlaDhFsHnjD\",\n            \"total_pembayaran\": 1689600,\n            \"total_bunga\": 189600,\n            \"status\": \"ACTIVE\",\n            \"tanggal_peminjaman\": \"2024-08-29T15:23:24+07:00\",\n            \"tanggal_akhir_pembayaran\": \"2025-03-01T00:00:00+07:00\",\n            \"updated_at\": null,\n            \"sisa_pembayaran\": 1689600,\n            \"lama_tenor\": 6,\n            \"otr\": 1500000\n        },\n        {\n            \"id\": \"MVI2uJmRYtJd2oh\",\n            \"id_user\": \"WFIdLL6qyL0BiB8\",\n            \"id_asset\": \"HHRySZn1Md6UOz9\",\n            \"id_limit_tenor\": \"dn2yMlaDhFsHnjD\",\n            \"total_pembayaran\": 1689600,\n            \"total_bunga\": 189600,\n            \"status\": \"PAID\",\n            \"tanggal_peminjaman\": \"2024-08-29T11:00:17+07:00\",\n            \"tanggal_akhir_pembayaran\": \"2025-03-01T00:00:00+07:00\",\n            \"updated_at\": \"2024-08-29T11:29:04+07:00\",\n            \"sisa_pembayaran\": 0,\n            \"lama_tenor\": 6,\n            \"otr\": 1500000\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "get data penagihan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiV0ZJZExMNnF5TDBCaUI4IiwiZXhwIjoxNzI0OTg2NDM5fQ.6277SY1XFsfvkdP3YCJEQEzKtS1aOziykxQmOSHdRI4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/penagihan/CZeLzCjxeYFs9B8",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"penagihan",
+						"CZeLzCjxeYFs9B8"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get data penagihan",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/penagihan/CZeLzCjxeYFs9B8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"penagihan",
+								"CZeLzCjxeYFs9B8"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 Aug 2024 08:24:52 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1892"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"success melakukan pembayaran\",\n    \"data\": [\n        {\n            \"id\": \"9xmUl13vgjjwJMO\",\n            \"id_peminjaman\": \"CZeLzCjxeYFs9B8\",\n            \"id_user\": \"WFIdLL6qyL0BiB8\",\n            \"id_asset\": \"HHRySZn1Md6UOz9\",\n            \"nominal_pembayaran\": 281600,\n            \"string\": \"PAID\",\n            \"tanggal_pembayaran\": \"2024-08-29T15:24:35+07:00\",\n            \"tanggal_jatuh_tempo\": \"2025-03-01T00:00:00+07:00\",\n            \"created_at\": \"2024-08-29T15:23:25+07:00\",\n            \"updated_at\": \"2024-08-29T15:24:35+07:00\"\n        },\n        {\n            \"id\": \"ArafkFvCjLEzWjy\",\n            \"id_peminjaman\": \"CZeLzCjxeYFs9B8\",\n            \"id_user\": \"WFIdLL6qyL0BiB8\",\n            \"id_asset\": \"HHRySZn1Md6UOz9\",\n            \"nominal_pembayaran\": 281600,\n            \"string\": \"UNPAID\",\n            \"tanggal_pembayaran\": null,\n            \"tanggal_jatuh_tempo\": \"2024-09-29T00:00:00+07:00\",\n            \"created_at\": \"2024-08-29T15:23:25+07:00\",\n            \"updated_at\": null\n        },\n        {\n            \"id\": \"OOMHGiueR90sr2g\",\n            \"id_peminjaman\": \"CZeLzCjxeYFs9B8\",\n            \"id_user\": \"WFIdLL6qyL0BiB8\",\n            \"id_asset\": \"HHRySZn1Md6UOz9\",\n            \"nominal_pembayaran\": 281600,\n            \"string\": \"UNPAID\",\n            \"tanggal_pembayaran\": null,\n            \"tanggal_jatuh_tempo\": \"2024-10-29T00:00:00+07:00\",\n            \"created_at\": \"2024-08-29T15:23:25+07:00\",\n            \"updated_at\": null\n        },\n        {\n            \"id\": \"PbzQpWXVgbvX8Mr\",\n            \"id_peminjaman\": \"CZeLzCjxeYFs9B8\",\n            \"id_user\": \"WFIdLL6qyL0BiB8\",\n            \"id_asset\": \"HHRySZn1Md6UOz9\",\n            \"nominal_pembayaran\": 281600,\n            \"string\": \"UNPAID\",\n            \"tanggal_pembayaran\": null,\n            \"tanggal_jatuh_tempo\": \"2025-01-29T00:00:00+07:00\",\n            \"created_at\": \"2024-08-29T15:23:25+07:00\",\n            \"updated_at\": null\n        },\n        {\n            \"id\": \"Q62em9yYqYbJWjo\",\n            \"id_peminjaman\": \"CZeLzCjxeYFs9B8\",\n            \"id_user\": \"WFIdLL6qyL0BiB8\",\n            \"id_asset\": \"HHRySZn1Md6UOz9\",\n            \"nominal_pembayaran\": 281600,\n            \"string\": \"UNPAID\",\n            \"tanggal_pembayaran\": null,\n            \"tanggal_jatuh_tempo\": \"2024-12-29T00:00:00+07:00\",\n            \"created_at\": \"2024-08-29T15:23:25+07:00\",\n            \"updated_at\": null\n        },\n        {\n            \"id\": \"vIM7IWcQSTVzZM8\",\n            \"id_peminjaman\": \"CZeLzCjxeYFs9B8\",\n            \"id_user\": \"WFIdLL6qyL0BiB8\",\n            \"id_asset\": \"HHRySZn1Md6UOz9\",\n            \"nominal_pembayaran\": 281600,\n            \"string\": \"UNPAID\",\n            \"tanggal_pembayaran\": null,\n            \"tanggal_jatuh_tempo\": \"2024-11-29T00:00:00+07:00\",\n            \"created_at\": \"2024-08-29T15:23:25+07:00\",\n            \"updated_at\": null\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "assets",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiV0ZJZExMNnF5TDBCaUI4IiwiZXhwIjoxNzI0OTg2NDM5fQ.6277SY1XFsfvkdP3YCJEQEzKtS1aOziykxQmOSHdRI4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/assets",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"assets"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "assets",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/assets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"assets"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 Aug 2024 08:25:08 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "309"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": [\n        {\n            \"id_assets\": \"HHRySZn1Md6UOz9\",\n            \"nama_asset\": \"Mesin Cuci\",\n            \"type_asset\": \"WHITE_GOODS\",\n            \"otr_amount\": 1500000,\n            \"bunga\": 2,\n            \"admin_fee\": 80000\n        },\n        {\n            \"id_assets\": \"WX0yrXGiPQODshF\",\n            \"nama_asset\": \"Kulkas\",\n            \"type_asset\": \"WHITE_GOODS\",\n            \"otr_amount\": 1300000,\n            \"bunga\": 2,\n            \"admin_fee\": 70000\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "user limit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiV0ZJZExMNnF5TDBCaUI4IiwiZXhwIjoxNzI0OTg2NDM5fQ.6277SY1XFsfvkdP3YCJEQEzKtS1aOziykxQmOSHdRI4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/user-limit",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user-limit"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "user limit",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user-limit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user-limit"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 Aug 2024 08:25:20 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "226"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"id\": \"dn2yMlaDhFsHnjD\",\n        \"id_user\": \"WFIdLL6qyL0BiB8\",\n        \"id_limit_tenor\": \"LCjpY7zQUgMwqC3\",\n        \"tenor_1_bulan\": 1000000,\n        \"tenor_2_bulan\": 1200000,\n        \"tenor_3_bulan\": 1500000,\n        \"tenor_6_bulan\": 100000\n    }\n}"
+				}
+			]
+		}
+	]
+}
