@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  api-gateway:
+    build: .
+    restart: always
+    ports:
+      - "8080:80"
+    container_name: api-gateway
+    image: api-gateway
+    environment:
+      - JWT_ACCESS_SECRET=supersecretrandomstring2019283
+      - JWT_REFRESH_SECRET=supersecretrandomstring2912739
+      - PORT=80
+  
+  mysql-final-project:
+    build: ./mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - DB_HOST=127.0.0.1
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_NAME=XYZ_multi_finance
+      - DB_PASSWORD=secretrootpassword
+    volumes:
+      - ./database/data:/var/lib/mysql
+    container_name: mysql-xyz
+    image: mysql-xyz
