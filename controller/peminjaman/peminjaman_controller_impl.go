@@ -48,3 +48,20 @@ func (c *peminjamanControllerImpl) Kredit(ctx echo.Context) error {
 		Message: "success",
 	})
 }
+
+func (c *peminjamanControllerImpl) GetAllPeminjaman(ctx echo.Context) error {
+	userId := ctx.Get("user_id").(string)
+	pemimjamanInfo, err := c.PeminjamanService.GetAllPeminjaman(userId)
+	if err != nil {
+		return ctx.JSON(http.StatusInternalServerError, models.Response{
+			Status:  false,
+			Message: err.Error(),
+		})
+	}
+
+	return ctx.JSON(http.StatusOK, models.Response{
+		Status:  true,
+		Message: "success",
+		Data:    pemimjamanInfo,
+	})
+}

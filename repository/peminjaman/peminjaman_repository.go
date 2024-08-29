@@ -7,4 +7,5 @@ type PeminjamanRepository interface {
 	UpdateDataPeminjaman(payload *models.Peminjaman) error
 	UpdateDataPeminjamanSisaPembayaran(payload *models.Peminjaman) error
 	GetDataPeminjaman(payload *models.Peminjaman) (*models.Peminjaman, error)
+	GetAllPeminjamanUser(payload *models.Peminjaman) ([]*models.Peminjaman, error)
 }

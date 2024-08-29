@@ -28,6 +28,12 @@ func NewPeminjamanService(repo peminjaman_repository.PeminjamanRepository, asset
 	}
 }
 
+func (s *peminjamanServiceImpl) GetAllPeminjaman(userID string) ([]*models.Peminjaman, error) {
+	return s.PeminjamanRepo.GetAllPeminjamanUser(&models.Peminjaman{
+		ID_User: userID,
+	})
+}
+
 func (s *peminjamanServiceImpl) Kredit(payload *models.PeminjamanRequest) error {
 
 	// get total price assets

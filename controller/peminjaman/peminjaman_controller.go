@@ -6,4 +6,5 @@ import (
 
 type PeminjamanController interface {
 	Kredit(ctx echo.Context) error
+	GetAllPeminjaman(ctx echo.Context) error
 }

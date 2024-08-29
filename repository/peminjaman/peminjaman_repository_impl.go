@@ -32,3 +32,8 @@ func (c *peminjamanRepositoryImpl) GetDataPeminjaman(payload *models.Peminjaman)
 	model := new(models.Peminjaman)
 	return model, c.DB.Table("peminjamans").Find(model).Error
 }
+
+func (c *peminjamanRepositoryImpl) GetAllPeminjamanUser(payload *models.Peminjaman) ([]*models.Peminjaman, error) {
+	var model []*models.Peminjaman
+	return model, c.DB.Table("peminjamans").Where("id_user = ?", payload.ID_User).Find(&model).Error
+}
