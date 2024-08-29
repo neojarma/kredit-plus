@@ -28,3 +28,8 @@ func (r *penagihanRepositoryImpl) CariDataPenagihan(payload *models.Penagihan) (
 	model := new(models.Penagihan)
 	return model, r.DB.Where("id_penagihan = ?", payload.ID).First(model).Error
 }
+
+func (r *penagihanRepositoryImpl) GetListPenagihanByPeminjamanID(payload *models.Penagihan) ([]*models.Penagihan, error) {
+	var model []*models.Penagihan
+	return model, r.DB.Where("id_peminjaman = ?", payload.ID_Peminjaman).Find(&model).Error
+}

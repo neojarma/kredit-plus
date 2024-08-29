@@ -41,3 +41,21 @@ func (c *penagihanControllerImpl) BayarTagihan(ctx echo.Context) error {
 		Message: "success melakukan pembayaran",
 	})
 }
+
+func (c *penagihanControllerImpl) GetAllPenagihan(ctx echo.Context) error {
+	peminjamanID := ctx.Param("id")
+
+	penagihanInfo, err := c.PenagihanService.GetDataPenagihan(peminjamanID)
+	if err != nil {
+		return ctx.JSON(http.StatusInternalServerError, models.Response{
+			Status:  false,
+			Message: err.Error(),
+		})
+	}
+
+	return ctx.JSON(http.StatusOK, models.Response{
+		Status:  true,
+		Message: "success melakukan pembayaran",
+		Data:    penagihanInfo,
+	})
+}

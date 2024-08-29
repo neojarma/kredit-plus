@@ -57,8 +57,8 @@ func Router(setup Setups) {
 	setup.Echo.GET("/profile", userController.GetUserProfile, auth.VerifyToken)
 	setup.Echo.Static("/assets", "assets")
 	setup.Echo.GET("/peminjaman", peminjamanController.GetAllPeminjaman, auth.VerifyToken)
+	setup.Echo.GET("/penagihan/:id", penagihanController.GetAllPenagihan, auth.VerifyToken)
 
-	// get all penagihan by peminjaman id
 	// get all asset
 	// get limit user
 }

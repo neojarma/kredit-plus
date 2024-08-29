@@ -24,6 +24,12 @@ func NewPenagihanService(penagihanRepo penagihan_repository.PenagihanRepository,
 	}
 }
 
+func (s *penagihanServiceImpl) GetDataPenagihan(idPeminjaman string) ([]*models.Penagihan, error) {
+	return s.PenagihanRepository.GetListPenagihanByPeminjamanID(&models.Penagihan{
+		ID_Peminjaman: idPeminjaman,
+	})
+}
+
 func (s *penagihanServiceImpl) BayarTagihan(payload *models.PenagihanRequest) error {
 
 	// get data penagihan
