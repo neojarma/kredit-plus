@@ -5,6 +5,6 @@ type Assets struct {
 	NamaAsset string  `json:"nama_asset"`
 	TypeAsset string  `json:"type_asset"`
 	OTRAmount float64 `json:"otr_amount"`
-	Bunga     float64 `json:"bunga"`
+	Bunga     float64 `gorm:"column:bunga_persen" json:"bunga"`
 	AdminFee  float64 `json:"admin_fee"`
 }

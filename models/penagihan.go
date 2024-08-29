@@ -12,5 +12,11 @@ type Penagihan struct {
 	TanggalPembayaran *string   `json:"tanggal_pembayaran"`
 	TanggalJatuhTempo string    `json:"tanggal_jatuh_tempo"`
 	CreatedAt         time.Time `json:"created_at"`
-	UpdatedAt         time.Time `json:"updated_at"`
+	UpdatedAt         *string   `json:"updated_at"`
+}
+
+type PenagihanRequest struct {
+	ID_Penagihan      string  `gorm:"column:id_penagihan;primaryKey" json:"id_penagihan"`
+	NominalPembayaran float64 `json:"nominal_pembayaran"`
+	IDUser            string  `json:"id_user"`
 }

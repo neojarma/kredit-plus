@@ -4,6 +4,7 @@ import (
 	"kredit_plus/auth"
 	auth_controller "kredit_plus/controller/auth"
 	peminjaman_controller "kredit_plus/controller/peminjaman"
+	penagihan_controller "kredit_plus/controller/penagihan"
 	user_controller "kredit_plus/controller/user"
 	assets_repository "kredit_plus/repository/assets"
 	auth_repository "kredit_plus/repository/auth"
@@ -14,6 +15,7 @@ import (
 	user_tenor_repository "kredit_plus/repository/user_tenor"
 	auth_service "kredit_plus/service/auth"
 	peminjaman_service "kredit_plus/service/peminjaman"
+	penagihan_service "kredit_plus/service/penagihan"
 	user_service "kredit_plus/service/user"
 
 	"github.com/labstack/echo/v4"
@@ -42,10 +44,19 @@ func Router(setup Setups) {
 	penagihanRepo := penagihan_repository.NewPenagihanRepository(setup.DB)
 	peminjamanService := peminjaman_service.NewPeminjamanService(peminjamanRepository, assetRepo, userTenorRepo, penagihanRepo)
 	peminjamanController := peminjaman_controller.NewPeminjaman(peminjamanService)
+	penagihanService := penagihan_service.NewPenagihanService(penagihanRepo, peminjamanRepository, userTenorRepo)
+	penagihanController := penagihan_controller.NewPenagihanController(penagihanService)
 
 	setup.Echo.POST("/register", userController.Register)
 	setup.Echo.POST("/login", authController.Login)
 	setup.Echo.POST("/refresh-token", authController.RefreshToken)
 
 	setup.Echo.POST("/kredit", peminjamanController.Kredit, auth.VerifyToken)
+	setup.Echo.POST("/bayar-kredit", penagihanController.BayarTagihan, auth.VerifyToken)
+
+	// get user profile
+	// get all peminjaman user
+	// get all penagihan by peminjaman id
+	// get all asset
+	// get limit user
 }

@@ -19,3 +19,12 @@ func NewPenagihanRepository(db *gorm.DB) PenagihanRepository {
 func (r *penagihanRepositoryImpl) InsertPenagihan(payload []*models.Penagihan) error {
 	return r.DB.Create(payload).Error
 }
+
+func (r *penagihanRepositoryImpl) UpdatePenagihan(payload *models.Penagihan) error {
+	return r.DB.Model(payload).Where("id_penagihan = ?", payload.ID).Updates(payload).Error
+}
+
+func (r *penagihanRepositoryImpl) CariDataPenagihan(payload *models.Penagihan) (*models.Penagihan, error) {
+	model := new(models.Penagihan)
+	return model, r.DB.Where("id_penagihan = ?", payload.ID).First(model).Error
+}

@@ -43,7 +43,7 @@ func (c *peminjamanControllerImpl) Kredit(ctx echo.Context) error {
 		})
 	}
 
-	return ctx.JSON(http.StatusInternalServerError, models.Response{
+	return ctx.JSON(http.StatusOK, models.Response{
 		Status:  true,
 		Message: "success",
 	})

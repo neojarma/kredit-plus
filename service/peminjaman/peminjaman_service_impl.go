@@ -56,7 +56,7 @@ func (s *peminjamanServiceImpl) Kredit(payload *models.PeminjamanRequest) error 
 	// totalBunga = (OTR + admin fee) * bunga * tenor
 	// totalBayar = OTR + totalBunga
 	// bayarPerBulan = totalBayar / tenor
-	totalBunga := (assetsInfo.OTRAmount + assetsInfo.AdminFee) * assetsInfo.Bunga / 100 * float64(payload.Tenor)
+	totalBunga := (assetsInfo.OTRAmount + assetsInfo.AdminFee) * float64(assetsInfo.Bunga/float64(100)) * float64(payload.Tenor)
 	totalBayar := assetsInfo.OTRAmount + totalBunga
 	bayarPerBulan := totalBayar / float64(payload.Tenor)
 
@@ -74,6 +74,9 @@ func (s *peminjamanServiceImpl) Kredit(payload *models.PeminjamanRequest) error 
 		TanggalPeminjaman:      now.Format(const_value.DATE_FORMAT_WITH_TIME),
 		TanggalAkhirPembayaran: now.AddDate(0, payload.Tenor, 0).Format(const_value.DATE_FORMAT),
 		SisaPembayaran:         totalBayar,
+		UpdatedAt:              nil,
+		LamaTenor:              payload.Tenor,
+		OTR:                    assetsInfo.OTRAmount,
 	})
 	if err != nil {
 		return err
@@ -93,6 +96,7 @@ func (s *peminjamanServiceImpl) Kredit(payload *models.PeminjamanRequest) error 
 			TanggalJatuhTempo: tempDate.AddDate(0, 1, 0).Format(const_value.DATE_FORMAT),
 			CreatedAt:         time.Now(),
 			TanggalPembayaran: nil,
+			UpdatedAt:         nil,
 		}
 		dataPenagihan = append(dataPenagihan, &newDataPenagihan)
 		tempDate = tempDate.AddDate(0, 1, 0)

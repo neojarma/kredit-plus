@@ -21,9 +21,8 @@ func (m *userTenorImpl) InsertUserTenorProfile(payload *models.UserTenor) error 
 }
 
 func (m *userTenorImpl) GetUserTenorProfile(payload *models.UserTenor) (*models.UserTenor, error) {
-	print(payload.ID_User)
 	model := new(models.UserTenor)
-	err := m.DB.Where("id_user = ?", payload.ID_User).Find(model).Error
+	err := m.DB.Where("id_user = ?", payload.ID_User).First(model).Error
 
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
@@ -48,5 +47,4 @@ func (m *userTenorImpl) UpdateUserTenorProfile(payload *models.UserTenor) error 
 	}
 
 	return nil
-
 }
