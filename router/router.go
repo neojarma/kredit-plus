@@ -7,6 +7,7 @@ import (
 	peminjaman_controller "kredit_plus/controller/peminjaman"
 	penagihan_controller "kredit_plus/controller/penagihan"
 	user_controller "kredit_plus/controller/user"
+	usertenor_controller "kredit_plus/controller/user_tenor"
 	assets_repository "kredit_plus/repository/assets"
 	auth_repository "kredit_plus/repository/auth"
 	limit_repository "kredit_plus/repository/limit"
@@ -19,6 +20,7 @@ import (
 	peminjaman_service "kredit_plus/service/peminjaman"
 	penagihan_service "kredit_plus/service/penagihan"
 	user_service "kredit_plus/service/user"
+	usertenor_service "kredit_plus/service/user_tenor"
 
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
@@ -51,6 +53,8 @@ func Router(setup Setups) {
 
 	assetsService := assets_service.NewAssetsService(assetRepo)
 	assetsController := assets_controller.NewAssetsController(assetsService)
+	userTenorLimitService := usertenor_service.NewUserTenorService(userTenorRepo)
+	userTenorLimitController := usertenor_controller.NewUserTenorController(userTenorLimitService)
 
 	setup.Echo.POST("/register", userController.Register)
 	setup.Echo.POST("/login", authController.Login)
@@ -64,7 +68,6 @@ func Router(setup Setups) {
 	setup.Echo.GET("/peminjaman", peminjamanController.GetAllPeminjaman, auth.VerifyToken)
 	setup.Echo.GET("/penagihan/:id", penagihanController.GetAllPenagihan, auth.VerifyToken)
 	setup.Echo.GET("/assets", assetsController.GetAllAssets, auth.VerifyToken)
+	setup.Echo.GET("/user-limit", userTenorLimitController.GetUserTenor, auth.VerifyToken)
 
-	// get all asset
-	// get limit user
 }
