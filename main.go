@@ -3,17 +3,15 @@ package main
 import (
 	"kredit_plus/connection"
 	"kredit_plus/router"
-	"log"
 	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 )
 
 func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
-	}
+	// if err := godotenv.Load(); err != nil {
+	// 	log.Fatalf("Error loading .env file: %v", err)
+	// }
 	e := echo.New()
 
 	db, err := connection.GetConnection()

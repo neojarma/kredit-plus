@@ -1,4 +1,4 @@
-FROM golang:1.19.3-alpine AS builder
+FROM golang:1.23.0-alpine AS builder
 
 RUN mkdir /app
 
@@ -12,6 +12,8 @@ RUN go build -o app-xyz /app/main.go
 FROM alpine
 
 RUN mkdir /app
+
+COPY --from=builder /app/.env /app
 
 COPY --from=builder /app/app-xyz /app
 
