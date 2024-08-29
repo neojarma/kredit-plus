@@ -18,6 +18,23 @@ func NewUserController(userService user_service.UserService) UserController {
 	}
 }
 
+func (c *userControllerImpl) GetUserProfile(ctx echo.Context) error {
+	userId := ctx.Get("user_id").(string)
+	userInfo, err := c.UserService.GetUser(userId)
+	if err != nil {
+		return ctx.JSON(http.StatusNotFound, models.Response{
+			Status:  false,
+			Message: "user not found",
+		})
+	}
+
+	return ctx.JSON(http.StatusOK, models.Response{
+		Status:  true,
+		Message: "success",
+		Data:    userInfo,
+	})
+}
+
 func (c *userControllerImpl) Register(ctx echo.Context) error {
 	payload := new(models.UserRequestRegister)
 	if err := ctx.Bind(payload); err != nil {

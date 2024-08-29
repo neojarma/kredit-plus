@@ -54,6 +54,8 @@ func Router(setup Setups) {
 	setup.Echo.POST("/kredit", peminjamanController.Kredit, auth.VerifyToken)
 	setup.Echo.POST("/bayar-kredit", penagihanController.BayarTagihan, auth.VerifyToken)
 
+	setup.Echo.GET("/profile", userController.GetUserProfile, auth.VerifyToken)
+	setup.Echo.Static("/assets", "assets")
 	// get user profile
 	// get all peminjaman user
 	// get all penagihan by peminjaman id

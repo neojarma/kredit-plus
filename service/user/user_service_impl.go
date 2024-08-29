@@ -12,6 +12,7 @@ import (
 	"mime/multipart"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type userServiceImpl struct {
@@ -37,7 +38,7 @@ func (s *userServiceImpl) Register(payload *models.UserRequestRegister) error {
 		return err
 	}
 
-	SelfiePath, err := saveUploadedFile(payload.FotoKTP, fmt.Sprintf("assets/%s/Selfie/", newUserID))
+	SelfiePath, err := saveUploadedFile(payload.FotoSelfie, fmt.Sprintf("assets/%s/Selfie/", newUserID))
 	if err != nil {
 		return err
 	}
@@ -97,6 +98,20 @@ func (s *userServiceImpl) Register(payload *models.UserRequestRegister) error {
 	}
 
 	return nil
+}
+
+func (s *userServiceImpl) GetUser(idUser string) (*models.User, error) {
+	userInfo, err := s.UserRepo.GetUserProfile(&models.User{
+		ID: idUser,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	userInfo.FotoKTPPath = strings.ReplaceAll(userInfo.FotoKTPPath, "\\", "/")
+	userInfo.FotoSelfiePath = strings.ReplaceAll(userInfo.FotoSelfiePath, "\\", "/")
+
+	return userInfo, nil
 }
 
 func saveUploadedFile(file *multipart.FileHeader, destDir string) (string, error) {

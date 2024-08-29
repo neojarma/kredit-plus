@@ -6,4 +6,5 @@ import (
 
 type UserController interface {
 	Register(ctx echo.Context) error
+	GetUserProfile(ctx echo.Context) error
 }
